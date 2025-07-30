@@ -23,7 +23,7 @@ function Card({image, title, description}){
             style={{ transform: `perspective(1000px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)` }}
         >
             <img src={image}
-                alt="City skyline" className="w-full h-48 sm:h-64 object-cover"
+                alt="City skyline" loading="lazy" className="w-full h-48 sm:h-64 object-cover"
             />
             <span className="bg-red-500 text-white rounded px-3 py-1 absolute top-2 left-2 text-sm">
                 {language === 'en' ? 'Before' : 'Πριν'}

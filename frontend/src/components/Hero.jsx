@@ -68,7 +68,7 @@ function Hero() {
                     </div>
 
                     <div className="w-full lg:w-1/2 h-full lg:h-96 xl:h-120 relative">
-                        <img src={banner} alt="" className="rounded-2xl shadow-2xl shadow-blue-200 w-full h-full object-cover" />
+                        <img src={banner} loading="lazy" alt="hero" className="rounded-2xl shadow-2xl shadow-blue-200 w-full h-full object-cover" />
 
                         <div className="absolute -bottom-6 -left-6 bg-white p-6 rounded-xl shadow-lg gap-4 hidden sm:flex">
                             <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
