@@ -1,7 +1,15 @@
 import { useSelector } from "react-redux";
 import { beforeAfterCarRepair, faqImg, Restoration, sidePanel } from "../assets";
-import { CallToAction, Card, Container, Faq, Hero, HowItWorks, OurServices, Testimonial, TrustedInsurancePartners, WhyChooseUs } from "../components";
+import { Container, OurServices, HowItWorks, Spinner, TrustedInsurancePartners } from "../components";
 import Marquee from "react-fast-marquee";
+import { lazy, Suspense } from "react";
+
+const Hero = lazy(() => import('../components/Hero'));
+const Card = lazy(() => import('../components/Card'));
+const WhyChooseUs = lazy(() => import('../components/WhyChooseUs'));
+const Testimonial = lazy(() => import('../components/Testimonial'));
+const Faq = lazy(() => import('../components/Faq'));
+const CallToAction = lazy(() => import('../components/CallToAction'));
 
 function Home() {
     const language = useSelector(state => state.language);
@@ -225,7 +233,9 @@ function Home() {
 
     return (
         <main>
-            <Hero />
+            <Suspense fallback={<Spinner />}>
+                <Hero />
+            </Suspense>
             {/* Stats section */}
             <section className="bg-blue-600 p-5 md:p-10 mx-5 my-12 md:mx-16 lg:mx-24 xl:mx-28 rounded-xl text-center text-white">
                 <div className="grid grid-cols-2 md:grid-cols-4 rounded-2xl overflow-hidden">
@@ -282,7 +292,10 @@ function Home() {
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 justify-between items-center mt-7 gap-8">
                         {
                             ourWork.map(work => (
-                                <Card title={work.title} key={work.title} description={work.description} image={work.image} />
+                                <Suspense key={work.title} fallback={<Spinner />}>
+                                    <Card title={work.title} description={work.description} image={work.image} />
+                                </Suspense>
+                                
                             ))
                         }
                     </div>
@@ -345,7 +358,9 @@ function Home() {
 
             {/* Why Choose Us */}
             <Container className="mt-14">
-                <WhyChooseUs />
+                <Suspense fallback={<Spinner />}>
+                    <WhyChooseUs />
+                </Suspense>
             </Container>
 
             {/* Testimonials section */}
@@ -361,7 +376,9 @@ function Home() {
                         <div className="flex flex-wrap justify-between items-stretch gap-5 mt-8 mx-5 text-left">
                             {
                                 testimonials.map(testimonial => (
-                                    <Testimonial key={testimonial.name} name={testimonial.name} review={testimonial.review} location={testimonial.location} />
+                                    <Suspense key={testimonial.name} fallback={<Spinner />}>
+                                        <Testimonial name={testimonial.name} review={testimonial.review} location={testimonial.location} />
+                                    </Suspense>
                                 ))
                             }
                         </div>
@@ -381,19 +398,23 @@ function Home() {
                 </Container>
 
                 <Container className="grid grid-cols-1 lg:grid-cols-2 items-center justify-between lg:gap-10">
-                    <img src={faqImg} alt="faqImg" className="max-h-96" />
+                    <img src={faqImg} loading="lazy" alt="faqImg" className="max-h-96" />
 
                     <section className="-my-4 flex flex-col  py-10">
                         {
                             faqs.map(faq => (
-                                <Faq key={faq.question} question={faq.question} answer={faq.answer} />
+                                <Suspense key={faq.question} fallback={<Spinner />}>
+                                    <Faq question={faq.question} answer={faq.answer} />
+                                </Suspense>
                             ))
                         }
                     </section>
                 </Container>
             </section>
 
-            <CallToAction />
+            <Suspense fallback={<Spinner />}>
+                <CallToAction />
+            </Suspense>
         </main>
     );
 }

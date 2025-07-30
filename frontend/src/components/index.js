@@ -14,6 +14,7 @@ import FileUpload from "./FileUpload";
 import LanguageSwitcher from "./LanguageSwitcher";
 import ScrollToTop from "./ScrollToTop";
 import ScrollToTopIcon from "./ScrollToTopIcon";
+import Spinner from "./Spinner";
 
 export {
     Header,
@@ -32,4 +33,5 @@ export {
     LanguageSwitcher,
     ScrollToTop,
     ScrollToTopIcon,
+    Spinner,
 }

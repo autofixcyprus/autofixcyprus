@@ -15,7 +15,7 @@ app.use(express.urlencoded({limit:'16kb'}));
 app.use(cors());
 configureCloudinary();
 
-app.get('/api/v1/', (req, res) => res.send('Welcome Back!'));
+app.get('/api/v1/', (req, res) => res.status(200).send('Welcome Back!'));
 
 app.post('/api/v1/contact', contact);
 app.post('/api/v1/request-repair', upload.array('photos', 6), request);

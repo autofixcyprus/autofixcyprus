@@ -29,9 +29,6 @@ const RequestRepair = () => {
             }
         }
         else if (step === 2) {
-            isValid = await trigger(['damageDescription', 'incidentDate', 'incidentLocation']);
-        }
-        else if (step === 3) {
             // No validation needed for services (all optional)
             isValid = true;
         }
@@ -55,12 +52,7 @@ const RequestRepair = () => {
             setSending(true);
             const formData = new FormData();
             formData.append('name', requestData.fullName);
-            formData.append('email', requestData.email);
             formData.append('phone', requestData.phoneNumber);
-            formData.append('address', requestData.address);
-            formData.append('incidentDate', requestData.incidentDate);
-            formData.append('incidentLocation', requestData.incidentLocation);
-            formData.append('damageDescription', requestData.damageDescription);
             formData.append('insuranceSupport', requestData.insuranceSupport);
             formData.append('mechanicServices', requestData.mechanicServices);
             formData.append('pickupDelivery', requestData.pickupDelivery);
@@ -98,7 +90,7 @@ const RequestRepair = () => {
             <Container>
                 {/* Progress indicator */}
                 <div className="flex justify-between my-8">
-                    {[1, 2, 3, 4].map((stepNumber) => (
+                    {[1, 2, 3].map((stepNumber) => (
                         <div
                             key={stepNumber}
                             className={`flex flex-col items-center ${step >= stepNumber ? 'text-blue-600' : 'text-gray-400'}`}
@@ -106,24 +98,24 @@ const RequestRepair = () => {
                             <div className={`w-8 h-8 rounded-full flex items-center justify-center ${step >= stepNumber ? 'bg-blue-600 text-white' : 'bg-gray-200'}`}>
                                 {stepNumber === 1 && <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-camera w-5 h-5" data-lov-id="src/pages/RequestForm.tsx:91:16" data-lov-name="step.icon" data-component-path="src/pages/RequestForm.tsx" data-component-line="91" data-component-file="RequestForm.tsx" data-component-name="step.icon" data-component-content="%7B%22className%22%3A%22w-5%20h-5%22%7D"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"></path><circle cx="12" cy="13" r="3"></circle></svg>}
 
-                                {stepNumber === 2 && <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-file-text w-5 h-5" data-lov-id="src/pages/RequestForm.tsx:91:16" data-lov-name="step.icon" data-component-path="src/pages/RequestForm.tsx" data-component-line="91" data-component-file="RequestForm.tsx" data-component-name="step.icon" data-component-content="%7B%22className%22%3A%22w-5%20h-5%22%7D"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path><path d="M14 2v4a2 2 0 0 0 2 2h4"></path><path d="M10 9H8"></path><path d="M16 13H8"></path><path d="M16 17H8"></path></svg>}
+                                {/* {stepNumber === 2 && <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-file-text w-5 h-5" data-lov-id="src/pages/RequestForm.tsx:91:16" data-lov-name="step.icon" data-component-path="src/pages/RequestForm.tsx" data-component-line="91" data-component-file="RequestForm.tsx" data-component-name="step.icon" data-component-content="%7B%22className%22%3A%22w-5%20h-5%22%7D"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path><path d="M14 2v4a2 2 0 0 0 2 2h4"></path><path d="M10 9H8"></path><path d="M16 13H8"></path><path d="M16 17H8"></path></svg>} */}
 
-                                {stepNumber === 3 && <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-settings w-5 h-5" data-lov-id="src/pages/RequestForm.tsx:91:16" data-lov-name="step.icon" data-component-path="src/pages/RequestForm.tsx" data-component-line="91" data-component-file="RequestForm.tsx" data-component-name="step.icon" data-component-content="%7B%22className%22%3A%22w-5%20h-5%22%7D"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path><circle cx="12" cy="12" r="3"></circle></svg>}
+                                {stepNumber === 2 && <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-settings w-5 h-5" data-lov-id="src/pages/RequestForm.tsx:91:16" data-lov-name="step.icon" data-component-path="src/pages/RequestForm.tsx" data-component-line="91" data-component-file="RequestForm.tsx" data-component-name="step.icon" data-component-content="%7B%22className%22%3A%22w-5%20h-5%22%7D"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path><circle cx="12" cy="12" r="3"></circle></svg>}
 
-                                {stepNumber === 4 && <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-user w-5 h-5" data-lov-id="src/pages/RequestForm.tsx:91:16" data-lov-name="step.icon" data-component-path="src/pages/RequestForm.tsx" data-component-line="91" data-component-file="RequestForm.tsx" data-component-name="step.icon" data-component-content="%7B%22className%22%3A%22w-5%20h-5%22%7D"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>}
+                                {stepNumber === 3 && <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-user w-5 h-5" data-lov-id="src/pages/RequestForm.tsx:91:16" data-lov-name="step.icon" data-component-path="src/pages/RequestForm.tsx" data-component-line="91" data-component-file="RequestForm.tsx" data-component-name="step.icon" data-component-content="%7B%22className%22%3A%22w-5%20h-5%22%7D"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>}
                             </div>
                             <span className="text-sm mt-1 hidden sm:block">
                                 {stepNumber === 1 && `${language === 'en' ? 'Upload Photos' : 'Ανέβασμα φωτογραφιών'}`}
-                                {stepNumber === 2 && `${language === 'en' ? 'Describe Damage' : 'Περιγράψτε τη ζημιά'}`}
-                                {stepNumber === 3 && `${language === 'en' ? 'Select Services' : 'Επιλέξτε υπηρεσίες'}`}
-                                {stepNumber === 4 && `${language === 'en' ? 'Contact Info' : 'Στοιχεία επικοινωνίας'}`}
+                                {/* {stepNumber === 2 && `${language === 'en' ? 'Describe Damage' : 'Περιγράψτε τη ζημιά'}`} */}
+                                {stepNumber === 2 && `${language === 'en' ? 'Select Services' : 'Επιλέξτε υπηρεσίες'}`}
+                                {stepNumber === 3 && `${language === 'en' ? 'Contact Info' : 'Στοιχεία επικοινωνίας'}`}
                             </span>
                         </div>
                     ))}
                 </div>
 
                 <div aria-valuemax="100" aria-valuemin="0" role="progressbar" className="relative h-4 w-full overflow-hidden rounded-full bg-gray-200 mb-4">
-                    <div className="h-full w-full flex-1 bg-black transition-all" style={{ transform: `${step === 1 ? 'translateX(-75%)' : step === 2 ? 'translateX(-50%)' : step === 3 ? 'translateX(-25%)' : 'translateX(-0%)'}` }}></div>
+                    <div className="h-full w-full flex-1 bg-black transition-all" style={{ transform: `${step === 1 ? 'translateX(-66%)' : step === 2 ? 'translateX(-33%)' : 'translateX(-0%)'}` }}></div>
                 </div>
 
                 <form encType='multipart/form-data' onSubmit={handleSubmit(onSubmit)} style={{
@@ -172,7 +164,7 @@ const RequestRepair = () => {
                     )}
 
                     {/* Step 2: Describe Damage */}
-                    {step === 2 && (
+                    {/* {step === 2 && (
                         <div>
                             <h1 className="text-2xl font-bold mb-4">
                                 {language === 'en' ? 'Describe the Damage' : 'Περιγράψτε τη ζημιά'}
@@ -247,10 +239,10 @@ const RequestRepair = () => {
                                 </div>
                             </div>
                         </div>
-                    )}
+                    )} */}
 
-                    {/* Step 3: Additional Services */}
-                    {step === 3 && (
+                    {/* Step 2: Additional Services */}
+                    {step === 2 && (
                         <div>
                             <h1 className="text-2xl font-bold mb-4">
                                 {language === 'en' ? 'Additional Services' : 'Επιπλέον υπηρεσίες'}
@@ -357,8 +349,8 @@ const RequestRepair = () => {
                         </div>
                     )}
 
-                    {/* Step 4: Contact Info */}
-                    {step === 4 && (
+                    {/* Step 3: Contact Info */}
+                    {step === 3 && (
                         <div>
                             <h1 className="text-2xl font-bold mb-4">
                                 {language === 'en' ? 'Contact Info' : 'Στοιχεία επικοινωνίας'}
@@ -412,7 +404,7 @@ const RequestRepair = () => {
                                         </p>}
                                     </div>
 
-                                    <div className="space-y-4 w-full sm:w-1/2">
+                                    {/* <div className="space-y-4 w-full sm:w-1/2">
                                         <label htmlFor='email' className="flex items-center space-x-2 text-gray-700">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-mail w-4 h-4" data-lov-id="src/components/form/ContactInfo.tsx:57:14" data-lov-name="Mail" data-component-path="src/components/form/ContactInfo.tsx" data-component-line="57" data-component-file="ContactInfo.tsx" data-component-name="Mail" data-component-content="%7B%22className%22%3A%22w-4%20h-4%22%7D"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
 
@@ -430,10 +422,10 @@ const RequestRepair = () => {
                                         {errors.fullName && <p className="text-red-500 text-sm mt-1">
                                             {language === 'en' ? 'Email is required' : 'Απαιτείται email'}
                                         </p>}
-                                    </div>
+                                    </div> */}
                                 </div>
 
-                                <div className='space-y-4'>
+                                {/* <div className='space-y-4'>
                                     <label htmlFor='address' className="flex items-center space-x-2 text-gray-700">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-map-pin w-4 h-4" data-lov-id="src/components/form/ContactInfo.tsx:74:12" data-lov-name="MapPin" data-component-path="src/components/form/ContactInfo.tsx" data-component-line="74" data-component-file="ContactInfo.tsx" data-component-name="MapPin" data-component-content="%7B%22className%22%3A%22w-4%20h-4%22%7D"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle></svg>
 
@@ -451,7 +443,7 @@ const RequestRepair = () => {
                                     {errors.fullName && <p className="text-red-500 text-sm mt-1">
                                         {language === 'en' ? 'Address is required' : 'Απαιτείται διεύθυνση'}
                                     </p>}
-                                </div>
+                                </div> */}
 
                                 <div className="bg-blue-100 p-4 rounded-lg">
                                     <h4 className="font-medium text-blue-900 mb-2">
@@ -491,11 +483,11 @@ const RequestRepair = () => {
                             <div></div>
                         )}
 
-                        {step < 4 ? (
+                        {step < 3 ? (
                             <button
                                 type={step === 3 ? "button" : "button"} // Explicitly set for step 3
                                 onClick={(e) => {
-                                    if (step === 3) e.preventDefault(); // Additional prevention
+                                    if (step === 2) e.preventDefault(); // Additional prevention
                                     nextStep();
                                     window.scrollTo({ top: 0, behavior: 'smooth' })
                                 }}
